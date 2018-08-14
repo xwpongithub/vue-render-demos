@@ -6,3 +6,304 @@
 ul {
   list-style: none;
 }
+
+/*====1px边线====*/
+.border-top-1px, .border-right-1px,
+.border-bottom-1px, .border-left-1px,
+.border-1px {
+  position: relative;
+}
+
+.border-top-1px::before, .border-right-1px::before,
+.border-bottom-1px::before, .border-left-1px::before,
+.border-top-1px::after, .border-right-1px::after,
+.border-bottom-1px::after, .border-left-1px::after {
+  content: "";
+  display: block;
+  position: absolute;
+  transform-origin: 0 0;
+  z-index:15;
+}
+
+.border-top-1px::before {
+  border-top: 1px solid #d9d9d9;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transform-origin: 0 top;
+}
+
+.border-left-1px::before {
+  border-left: 1px solid #d9d9d9;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform-origin: left 0;
+}
+
+.border-bottom-1px::after {
+  border-bottom: 1px solid #d9d9d9;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  transform-origin: 0 bottom;
+}
+
+.border-right-1px::after {
+  border-right: 1px solid #d9d9d9;
+  top: 0;
+  right: 0;
+  height: 100%;
+  transform-origin: right 0;
+}
+
+.border-1px::after {
+  content: "";
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  border: 1px solid #d9d9d9;
+  box-sizing:border-box;
+  width:100%;
+  height:100%;
+}
+
+.border-none::before, .border-none::after {
+  display: none;
+}
+
+@media only screen and (min-resolution: 2dppx) {
+  .border-1px::after {
+    width: 200%;
+    height: 200%;
+    transform: scale(.5) translateZ(0);
+  }
+  .border-top-1px::before,.border-right-1px::after,.border-bottom-1px::after,.border-left-1px::before {
+    transform: scale(.5) translateZ(0);
+  }
+  .border-top-1px::before,
+  .border-bottom-1px::after {
+    width: 200%;
+  }
+  .border-right-1px::after,
+  .border-left-1px::before {
+    height: 200%;
+  }
+}
+
+@media only screen and (min-resolution: 3dppx) {
+  .border-1px::after {
+    width: 300%;
+    height: 300%;
+    transform: scale(.333) translateZ(0);
+  }
+  .border-top-1px::before,.border-right-1px::after,.border-bottom-1px::after,.border-left-1px::before {
+    transform: scale(.333) translateZ(0);
+  }
+  .border-top-1px::before,
+  .border-bottom-1px::after {
+    width: 300%;
+  }
+  .border-right-1px::after,
+  .border-left-1px::before {
+    height: 300%;
+  }
+}
+/*==========1px边线===============*/
+
+/*
+number-keyboard-width = 100%
+number-keyboard-height = 428px
+number-keyboard-bg = #ebebeb
+number-keyboard-key-height = 107px
+number-keyboard-key-bg = #fff
+number-keyboard-key-bg-tap = #f0f0f0
+number-keyboard-key-confirm-bg = #fc9153
+number-keyboard-key-confirm-bg-tap = #DD7F49
+number-keyboard-key-font-size = 48px
+number-keyboard-key-color = #666
+number-keyboard-key-color-simple = #000
+number-keyboard-key-confirm-color = #fff
+number-keyboard-key-bordr-color = #d9d9d9
+number-keyboard-zindex = 1403
+*/
+
+.number-keyboard-container {
+  position: relative;
+  -webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  display:flex;
+  width:100%;
+  height:428px;
+}
+.number-keyboard-container::before {
+  content: "";
+  position: absolute;
+  z-index:2;
+  transform-origin:100% 50%;
+  background-color:#d9d9d9;
+  transform:scaleY(0.5) translateY(-100%);
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+}
+
+
+.number-keyboard-container .keyboard-number, .number-keyboard-container .keyboard-operate {
+  display: flex;
+}
+
+.number-keyboard-container .keyboard-number::after,
+.number-keyboard-container .keyboard-operate::after{
+  content:'';
+  display:table;
+  clear:both;
+}
+
+.number-keyboard-container .keyboard-number {
+  flex:3;
+  background-color:#ebebeb;
+}
+
+.number-keyboard-container .keyboard-number .keyboard-number-list {
+  float:left;
+  width:100%;
+}
+
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item {
+  position: relative;
+  float:left;
+  width:33.3%;
+  height:107px;
+  text-align:center;
+  line-height:107px;
+  font-size:48px;
+  color:#666;
+  transition:background .3s;
+  background-color:#fff;
+}
+
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item::after {
+  content: "";
+  position: absolute;
+  z-index:2;
+  transform-origin:100% 50%;
+  background-color:#d9d9d9;
+  transform:scaleY(0.5) translateY(-100%);
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+}
+
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item::before {
+  content: "";
+  position: absolute;
+  z-index:2;
+  background-color:#d9d9d9;
+  transform-origin:100% 50%;
+  transform:scaleX(0.5) translateX(100%);
+  top:0;
+  right:0;
+  width:2px;
+  height:100%;
+}
+
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item.no-bg {
+  background-color: transparent;
+}
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item::after {
+  display:none;
+}
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item:nth-of-type(n+4)::after {
+   display:block;
+}
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item:nth-of-type(3n)::before {
+  display:none;
+}
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item.delete {
+  background:url(./images/keyboard-del-simple.png) center no-repeat;
+  background-size:46px;
+}
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item.slidedown {
+  background:#fff url(./images/keyboard-hide.png) center no-repeat;
+  background-size:55px;
+}
+.number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item:active {
+  background-color:#f0f0f0;
+}
+
+.number-keyboard-container .keyboard-operate {
+  flex:1;
+}
+
+.number-keyboard-container .keyboard-operate .keyboard-operate-list {
+  float:left;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item {
+  position:relative;
+  float:left;
+  width:100%;
+  background-color:#fff;
+  transition:background .3s;
+}
+
+.number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item.delete {
+  position: relative;
+  height:107px;
+  background:#fff url(./images/keyboard-del.png) center no-repeat;
+  background-size:42px;
+  display:flex;
+  flex :1;
+}
+.number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item.delete::after {
+  content:'';
+  position:absolute;
+  z-index:2;
+  background-color:#d9d9d9;
+  transform-origin:100% 50%;
+  top:0;
+  left:-1px;
+  width:2px;
+  height:100%;
+  transform:scaleX(0.5) translateX(-100%);
+}
+.number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item.delete:active {
+  background-color:#f0f0f0;
+}
+
+.number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item.confirm {
+  overflow:hidden;
+  color:#fff;
+  background:#fc9153;
+  display:flex;
+  flex:3;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  font-weight:500;
+}
+.number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item.confirm:active {
+  background-color:#f0f0f0;
+}
+
+@media only screen and (min-resolution: 3dppx) {
+  .number-keyboard-container::before,
+  .number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item::after {
+    transform:scaleY(0.333) translateY(-100%);
+  }
+  .number-keyboard-container .keyboard-number .keyboard-number-list .keyboard-number-item::before {
+    transform:scaleX(0.333) translateX(100%);
+  }
+  .number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item.delete::after {
+    transform:scaleX(0.333) translateX(-100%);
+  }
+}

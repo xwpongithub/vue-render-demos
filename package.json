@@ -1,5 +1,5 @@
 {
-  "name": "vue-render-guide-demos",
+  "name": "vue-render-demos",
   "version": "1.0.0",
   "description": "Vue render函数的用法示例",
   "keywords": ["javascript", "vue", "render", "component"],

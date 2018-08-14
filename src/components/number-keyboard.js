@@ -29,8 +29,19 @@ Vue.component(COMPONENT_NAME_NUMBER_KEYBOARD_CONTAINER, {
   },
   render(h) {
     const keyboardContent = []
+    const numberItems = []
+    for (let i = 1;i< 10;i++) {
+      numberItems.push(h('li', {
+        key: i - 1,
+        class: 'keyboard-number-item',
+        on: {
+          click: (e) => this.onNumberKeyClick(e, i - 1)
+        }
+      }, this.keyNumberList[i-1]))
+    }
+    let keyboardOperate
     if (this.type === 'professional') {
-      keyboardContent.push(h('div', {
+      keyboardOperate = h('div', {
         class: 'keyboard-operate'
       }, [
         h('ul', {
@@ -49,15 +60,69 @@ Vue.component(COMPONENT_NAME_NUMBER_KEYBOARD_CONTAINER, {
             }
           }, this.okText)
         ])
-      ]))
+      ])
+
+      numberItems.push(h('li', {
+        class: 'keyboard-number-item',
+        on: {
+          click: e => this.onNumberKeyClick(e, '.')
+        }
+      }, '.'))
+      numberItems.push(h('li', {
+        class: 'keyboard-number-item',
+        on: {
+          click: e => this.onNumberKeyClick(e, this.keyNumberList[9])
+        }
+      }, this.keyNumberList[9]))
+      if (this.isView) {
+        numberItems.push(h('li', {
+          class: 'keyboard-number-item'
+        }))
+      } else {
+        numberItems.push(h('li', {
+          class: ['keyboard-number-item', 'no-bg', 'delete'],
+          on: {
+            click: e => this.onDeleteClick(e)
+          }
+        }))
+      }
+    } else {
+      numberItems.push(h('li', {
+        class: ['keyboard-number-item','no-bg']
+      }))
+      numberItems.push(h('li', {
+        class: 'keyboard-number-item',
+        on: {
+          click: e => this.onNumberKeyClick(e, this.keyNumberList[9])
+        }
+      },this.keyNumberList[9]))
+      numberItems.push(h('li', {
+        class: ['keyboard-number-item', 'no-bg', 'delete'],
+        on: {
+          click: e => this.onDeleteClick(e)
+        }
+      }))
     }
+    const keyboardKeys = h('div', {
+      class: 'keyboard-number'
+    }, [
+      h('ul', {
+        class: 'keyboard-number-list'
+      }, numberItems)
+    ])
+    keyboardContent.push(keyboardKeys)
+    keyboardOperate && keyboardContent.push(keyboardOperate)
     return h('div', {
       class: ['number-keyboard-container', this.type]
     }, keyboardContent)
   },
   methods: {
-    onDeleteClick() {
-      event.stopImmediatePropagation()
+    onNumberKeyClick(e, val) {
+      e.stopImmediatePropagation()
+      this.$emit('enter', val)
+    },
+    onDeleteClick(e) {
+      e.stopImmediatePropagation()
       this.$emit('delete')
     },
     onConfirmClick() {
