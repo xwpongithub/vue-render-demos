@@ -183,7 +183,8 @@ Vue.component(COMPONENT_NAME_SCROLL, {
             pullDownStyle: this.pullDownStyle,
             beforePullDown: this.beforePullDown,
             isPullingDown: this.isPullingDown,
-            bubbleY: this.bubbleY
+            bubbleY: this.bubbleY,
+            refreshTxt: this.refreshTxt
           })]))
         } else {
           wrapperContent.push(h('div', {
