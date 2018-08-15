@@ -1,18 +1,6 @@
-const COMPONENT_NAME_APP = 'app'
+Vue.use(NumberKeyboard)
 
-Vue.component(COMPONENT_NAME_APP, {
-  data() {
-    return {
-      popShow: false
-    }
-  },
-  render(h) {
-    return h('div', {
-      attrs: {
-        id: 'app'
-      }
-    }, [
-      h(COMPONENT_NAME_NUMBER_KEYBOARD_CONTAINER)
-    ])
-  }
-})
+const keyboard = NumberKeyboard.$create({
+  onShow: () => console.log('show'),
+  onHide: () => console.log('hide')
+}, true)

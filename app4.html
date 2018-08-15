@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
-    <title></title>
+    <title>脱离vue实例加载组件</title>
     <link rel="stylesheet" href="src/style4.css">
 </head>
 <body>
-<div id="app"></div>
+<button type="button" onclick="keyboard.show()">显示</button>
+<button type="button" onclick="keyboard.hide()">隐藏</button>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+<script src="src/util.js"></script>
 <script src="src/components/number-keyboard.js"></script>
 <script src="src/components/app4.js"></script>
-<script>
-  new Vue({
-    el: '#app',
-    render: h => h(COMPONENT_NAME_APP)
-  })
-</script>
 </body>
 </html>

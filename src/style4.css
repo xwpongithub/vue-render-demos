@@ -7,129 +7,136 @@ ul {
   list-style: none;
 }
 
-/*====1px边线====*/
-.border-top-1px, .border-right-1px,
-.border-bottom-1px, .border-left-1px,
-.border-1px {
-  position: relative;
+.popup.with-mask {
+  position: fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:1000;
 }
 
-.border-top-1px::before, .border-right-1px::before,
-.border-bottom-1px::before, .border-left-1px::before,
-.border-top-1px::after, .border-right-1px::after,
-.border-bottom-1px::after, .border-left-1px::after {
-  content: "";
-  display: block;
+.popup .popup-mask {
   position: absolute;
-  transform-origin: 0 0;
-  z-index:15;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index: 1;
+  background-color:rgba(0, 0, 0, .4);
 }
 
-.border-top-1px::before {
-  border-top: 1px solid #d9d9d9;
-  left: 0;
-  top: 0;
-  width: 100%;
-  transform-origin: 0 top;
+.popup .popup-box {
+  position:fixed;
+  z-index:1;
+  max-width:100%;
+  max-height:100%;
+  overflow:auto;
+  will-change:auto;
 }
 
-.border-left-1px::before {
-  border-left: 1px solid #d9d9d9;
-  top: 0;
-  left: 0;
-  height: 100%;
-  transform-origin: left 0;
+.popup .popup-box.slide-up {
+  padding-bottom: constant(safe-area-inset-bottom);
 }
 
-.border-bottom-1px::after {
-  border-bottom: 1px solid #d9d9d9;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  transform-origin: 0 bottom;
+.popup.top .popup-box, .popup.bottom .popup-box,
+.popup.left .popup-box, .popup.right .popup-box{
+  transition:all .3s;
 }
 
-.border-right-1px::after {
-  border-right: 1px solid #d9d9d9;
-  top: 0;
-  right: 0;
-  height: 100%;
-  transform-origin: right 0;
+.popup.center .popup-box {
+  top:50%;
+  right:auto;
+  bottom:auto;
+  left:50%;
+  transform:translate(-50%, -50%);
 }
 
-.border-1px::after {
-  content: "";
-  pointer-events: none;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform-origin: 0 0;
-  border: 1px solid #d9d9d9;
-  box-sizing:border-box;
+.popup.top .popup-box,
+.popup.bottom .popup-box {
   width:100%;
+}
+
+.popup.left .popup-box,
+.popup.right .popup-box {
   height:100%;
 }
 
-.border-none::before, .border-none::after {
-  display: none;
+.popup.top .popup-box {
+  top:0;
+  left:0;
 }
 
-@media only screen and (min-resolution: 2dppx) {
-  .border-1px::after {
-    width: 200%;
-    height: 200%;
-    transform: scale(.5) translateZ(0);
-  }
-  .border-top-1px::before,.border-right-1px::after,.border-bottom-1px::after,.border-left-1px::before {
-    transform: scale(.5) translateZ(0);
-  }
-  .border-top-1px::before,
-  .border-bottom-1px::after {
-    width: 200%;
-  }
-  .border-right-1px::after,
-  .border-left-1px::before {
-    height: 200%;
-  }
+.popup.bottom .popup-box {
+  bottom:0;
+  left:0;
 }
 
-@media only screen and (min-resolution: 3dppx) {
-  .border-1px::after {
-    width: 300%;
-    height: 300%;
-    transform: scale(.333) translateZ(0);
-  }
-  .border-top-1px::before,.border-right-1px::after,.border-bottom-1px::after,.border-left-1px::before {
-    transform: scale(.333) translateZ(0);
-  }
-  .border-top-1px::before,
-  .border-bottom-1px::after {
-    width: 300%;
-  }
-  .border-right-1px::after,
-  .border-left-1px::before {
-    height: 300%;
-  }
+.popup.left .popup-box {
+  left:0;
+  top:0;
 }
-/*==========1px边线===============*/
 
-/*
-number-keyboard-width = 100%
-number-keyboard-height = 428px
-number-keyboard-bg = #ebebeb
-number-keyboard-key-height = 107px
-number-keyboard-key-bg = #fff
-number-keyboard-key-bg-tap = #f0f0f0
-number-keyboard-key-confirm-bg = #fc9153
-number-keyboard-key-confirm-bg-tap = #DD7F49
-number-keyboard-key-font-size = 48px
-number-keyboard-key-color = #666
-number-keyboard-key-color-simple = #000
-number-keyboard-key-confirm-color = #fff
-number-keyboard-key-bordr-color = #d9d9d9
-number-keyboard-zindex = 1403
-*/
+.popup.right .popup-box {
+  right:0;
+  top:0;
+}
+
+
+.fade-enter-active,.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to, .fade-leave-active {
+  opacity:0;
+}
+
+
+.slide-up-enter-active, .slide-up-leave-active, .slide-down-enter-active,
+.slide-down-leave-active, .bottom .show {
+  transform:translateY(0);
+}
+
+.slide-up-enter, .slide-up-leave-to {
+  /* Solve the problem of hiding to show
+   * in the animation state of elements outside the viewport
+   */
+  transform:translateY(70%);
+}
+
+.slide-up-leave-active {
+  transform:translateY(100%);
+}
+
+.slide-down-enter, .slide-down-leave-to {
+  transform:translateY(-70%);
+}
+.slide-down-leave-active {
+  transform:translateY(-100%);
+}
+
+.slide-left-enter-active, .slide-left-leave-active, .slide-right-enter-active, .slide-right-leave-active {
+  transform:translateX(0);
+}
+.slide-left-enter, .slide-left-leave-to {
+  transform:translateX(70%);
+}
+.slide-left-leave-active {
+  transform:translateX(100%);
+}
+
+.slide-right-enter, .slide-right-leave-to {
+  transform:translateX(-70%);
+}
+.slide-right-leave-active {
+  transform:translateX(-100%);
+}
+
+
+.popup .popup-box .popup-content {
+  background-color: #fff;
+  padding:20px;
+  text-align:center;
+}
 
 .number-keyboard-container {
   position: relative;
@@ -306,4 +313,11 @@ number-keyboard-zindex = 1403
   .number-keyboard-container .keyboard-operate .keyboard-operate-list .keyboard-operate-item.delete::after {
     transform:scaleX(0.333) translateX(-100%);
   }
+}
+
+.number-keyboard .popup,.number-keyboard .popup-box {
+  z-index:1403 !important;
+}
+.number-keyboard .popup-box {
+  background-color:#fff;
 }
