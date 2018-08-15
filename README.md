@@ -1,4 +1,4 @@
-# vue-render--demos
+# vue-render-demos
   这里的实例脱离了vue的构建环境， 完全用render函数来实现组件渲染，如果你想学习以下render函数的用法而不是单纯只会使用模板渲染，
 通过查看这里的写法也许你帮助你解决一些疑惑。在这些示例中，展示了slot,scopedSlot,函数式组件等在render函数中的使用方法。
 
